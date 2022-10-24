@@ -5,18 +5,16 @@
 var express = require('express')
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
-const upload = require('./controllers/upload')
 const uploadRoutes = require('./routes/upload');
 const userRoutes = require('./routes/user');
-
+require('dotenv').config()
 const app = express()
-
 mongoose
-  .connect('mongodb://localhost:27017/test', { useNewUrlParser: true })
+  .connect(`${process.env.MONGO_DB_CONNECTION_STR}/test`, { useNewUrlParser: true })
   .then(() => console.log('Connected'))
   .catch((err) => console.log(err))
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use('/upload', uploadRoutes)
 app.use('/user', userRoutes);
