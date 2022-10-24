@@ -51,12 +51,7 @@ const updateUser = async (req, res) => {
                 res.send("User does not exists");   
             }
         }else{
-            res.send("Wrong Inputs");
-        }
-        if (user){
-            res.send(user);
-        }else{
-            res.send("User does not exists");
+            res.send("Wrong Input");
         }
         
     } catch (error) {
