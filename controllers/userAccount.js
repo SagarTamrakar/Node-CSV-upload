@@ -7,9 +7,6 @@ const createUserAccount = async(req, res) => {
             } = req.body
     // Validate req body here.        
     try {
-        console.log(
-            "body", req.body
-        );
         const userAccount = await UserAccount.create({ 
             accountName, 
             accountType, 
@@ -19,7 +16,7 @@ const createUserAccount = async(req, res) => {
             res.send(userAccount);
         }
     } catch (error) {
-        console.log(error.msg, error);
+        console.log(error);
         res.sendStatus(400).send('something went wrong');
     }   
 };
@@ -34,6 +31,7 @@ const getUserAccount = async (req, res) => {
             res.sendStatus(400).send("Parameter is missing");
         }
     } catch (error) {
+        console.log(error);
         res.sendStatus(400).send("User Account not found");
     }
 }
@@ -52,6 +50,7 @@ const updateUserAccount = async (req, res) => {
         }
         
     } catch (error) {
+        console.log(error);
         res.send(error.messsage)
     }
 }
@@ -62,9 +61,10 @@ const deleteUserAccount = async (req, res) => {
             let userAccount = await UserAccount.findByIdAndDelete(req.params._id);
             userAccount ? 
                 res.send(`User Account(${userAccount.accountName}) has been deleted successfully.`)
-                : res.send(`User does not exist or already deleted.`);
+                : res.send(`User Account does not exist or already deleted.`);
         }     
     } catch (error) {
+        console.log(error);
         res.send(error)
     }
 }

@@ -14,15 +14,12 @@ const createUser = async(req, res) => {
             } = req.body
     // Validate req body here.        
     try {
-        console.log(
-            "body", req.body
-        );
         const user = await User.create(req.body);
         if(user){
             res.send(user);
         }
     } catch (error) {
-        console.log(error.msg, error);
+        console.log(error);
         res.sendStatus(400).send('something went wrong');
     }   
 };
@@ -37,6 +34,7 @@ const getUser = async (req, res) => {
             res.sendStatus(400).send("Parameter is missing");
         }
     } catch (error) {
+        console.log(error);
         res.sendStatus(400).send("User not found");
     }
 }
@@ -51,6 +49,7 @@ const updateUser = async (req, res) => {
                 res.send("User does not exists");   
             }
         }else{
+            console.log(error);
             res.send("Wrong Input");
         }
         
@@ -68,6 +67,7 @@ const deleteUser = async (req, res) => {
                 : res.send(`User does not exists or already deleted.`);
         }     
     } catch (error) {
+        console.log(error);
         res.send(error)
     }
 }

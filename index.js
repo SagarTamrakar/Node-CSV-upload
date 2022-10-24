@@ -7,6 +7,7 @@ var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 const uploadRoutes = require('./routes/upload');
 const userRoutes = require('./routes/user');
+const policyRoutes = require('./routes/policy');
 const userAccountRoutes = require('./routes/userAccount')
 require('dotenv').config()
 const app = express()
@@ -20,6 +21,7 @@ app.use(bodyParser.json())
 app.use('/upload', uploadRoutes)
 app.use('/user', userRoutes);
 app.use('/userAccount', userAccountRoutes);
+app.use('/policy', policyRoutes)
 
 var port = process.env.PORT || 5555
 app.listen(port, () => console.log('App connected on: ' + port))
